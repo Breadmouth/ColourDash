@@ -1,0 +1,9 @@
+player trail
+powerup - laser pointer, slower gate
+faster actions = point multiplier
+points
+brighter colours
+menu screen
+touch controls
+google play integration
+
