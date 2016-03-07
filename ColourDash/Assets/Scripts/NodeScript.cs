@@ -12,6 +12,8 @@ public class NodeScript : MonoBehaviour {
 
     Color randomColour;
 
+    int rgbDecider;
+
 	void Start () {
 
         targetScale = new Vector3(0.7f, 0.7f, 0.7f);
@@ -19,10 +21,19 @@ public class NodeScript : MonoBehaviour {
         child1 = GetComponentsInChildren<NodeSemiScript>()[0];
         child2 = GetComponentsInChildren<NodeSemiScript>()[1];
 
-        randomColour = new Color(Random.Range(0.2f, 1), Random.Range(0.2f, 1), Random.Range(0.2f, 1));
+        rgbDecider = (int)Random.Range(0, 2.99f);
+
+        if (rgbDecider == 0)
+            randomColour = new Color(Random.Range(0.8f, 1), Random.Range(0.4f, 0.8f), Random.Range(0.4f, 0.8f));
+        else if (rgbDecider == 1)
+            randomColour = new Color(Random.Range(0.4f, 0.8f), Random.Range(0.8f, 1), Random.Range(0.4f, 0.8f));
+        else
+            randomColour = new Color(Random.Range(0.4f, 0.8f), Random.Range(0.4f, 0.8f), Random.Range(0.8f, 1));
 
         child1.SetColor(randomColour);
         child2.SetColor(randomColour);
+
+        GetComponent<Renderer>().material.color = randomColour * 0.35f;
 	}
 
 	void Update () {

@@ -14,11 +14,12 @@ public class PlayerScript : MonoBehaviour {
 
     bool touchNode = false;
 
+    float rotationDir = 1.0f;
+
 	void Start () {
 
         mainCamera = GameObject.Find("MainCamera").GetComponent<CameraScript>();
         gameController = GameObject.Find("MainCamera").GetComponent<GameControllerScript>();
-
 	}
 
 	void Update () {
@@ -47,12 +48,17 @@ public class PlayerScript : MonoBehaviour {
 
             canMove = true;
             mainCamera.SetFollow(true);
+
+            rotationDir *= 1.05f;
         }
 
         if (canMove)
         {
+            if (transform.rotation.eulerAngles.z > 90.0f && transform.rotation.eulerAngles.z < 270.0f)
+                rotationDir *= -1;
+
             //rotate player
-            transform.Rotate(transform.forward, rotateSpeed * Time.deltaTime);
+            transform.Rotate(transform.forward, rotateSpeed * Time.deltaTime * rotationDir);
         }
 
 	}
