@@ -23,12 +23,16 @@ public class PlayerScript : MonoBehaviour {
 
     GameObject currentNode;
 
+    ScoreScript scoreScript;
+
 	void Start () {
 
         mainCamera = GameObject.Find("MainCamera").GetComponent<CameraScript>();
         gameController = GameObject.Find("MainCamera").GetComponent<GameControllerScript>();
 
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+
+        scoreScript = GameObject.Find("Overlay").GetComponent<ScoreScript>();
 	}
 
 	void Update () {
@@ -109,6 +113,7 @@ public class PlayerScript : MonoBehaviour {
 
     void Restart()
     {
+        //scoreScript.EndGame();
         Application.LoadLevel(Application.loadedLevel);
     }
 
