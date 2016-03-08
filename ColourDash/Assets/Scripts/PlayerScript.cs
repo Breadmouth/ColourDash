@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -16,14 +17,36 @@ public class PlayerScript : MonoBehaviour {
 
     float rotationDir = 1.0f;
 
+    Text scoreText;
+
+    int score;
+
+    GameObject currentNode;
+
 	void Start () {
 
         mainCamera = GameObject.Find("MainCamera").GetComponent<CameraScript>();
         gameController = GameObject.Find("MainCamera").GetComponent<GameControllerScript>();
+
+        scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
 	}
 
 	void Update () {
-	
+
+        if (Input.touchCount > 0)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began && canMove)
+            {
+                //move in direction faced x distance
+                targetPosition = transform.position + transform.up * 5.0f;
+
+                mainCamera.SetFollow(false);
+
+                canMove = false;
+            }
+        }
+
+        //old computer controls
 
         if (Input.GetMouseButtonDown(0) && canMove)
         {
@@ -42,20 +65,20 @@ public class PlayerScript : MonoBehaviour {
             if (!touchNode)
                 Restart();
 
-            touchNode = false;
-
-            transform.position = targetPosition;
-
-            canMove = true;
-            mainCamera.SetFollow(true);
-
-            rotationDir *= 1.05f;
+            ReachNode();
+            UpdateScore();
         }
 
         if (canMove)
         {
             if (transform.rotation.eulerAngles.z > 90.0f && transform.rotation.eulerAngles.z < 270.0f)
+            {
                 rotationDir *= -1;
+                if (transform.rotation.eulerAngles.z < 180.0f)
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90.0f));
+                else
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, 270.0f));
+            }
 
             //rotate player
             transform.Rotate(transform.forward, rotateSpeed * Time.deltaTime * rotationDir);
@@ -74,11 +97,9 @@ public class PlayerScript : MonoBehaviour {
         {
             targetPosition = other.transform.position - new Vector3(0, 0, 5);
 
-            other.GetComponent<NodeScript>().ActivateNode();
-
-            gameController.CreateNewNode();
-
             touchNode = true;
+
+            currentNode = other.gameObject;
         }
         else if (other.tag == "Enemy")
         {
@@ -89,5 +110,28 @@ public class PlayerScript : MonoBehaviour {
     void Restart()
     {
         Application.LoadLevel(Application.loadedLevel);
+    }
+
+    void UpdateScore()
+    {
+            score++;
+
+            scoreText.text = score.ToString();
+    }
+
+    void ReachNode()
+    {
+        touchNode = false;
+
+        transform.position = targetPosition;
+
+        canMove = true;
+        mainCamera.SetFollow(true);
+
+        currentNode.GetComponent<NodeScript>().ActivateNode();
+
+        gameController.CreateNewNode();
+
+        rotateSpeed += 2.0f;
     }
 }

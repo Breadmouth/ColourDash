@@ -49,6 +49,8 @@ public class NodeScript : MonoBehaviour {
 
         targetScale = new Vector3(0.3f, 0.3f, 0.3f);
 
+        GetComponent<Collider2D>().enabled = false;
+
         nextNode.GetComponent<NodeScript>().BeginSpin();
         //change node colour?
     }
