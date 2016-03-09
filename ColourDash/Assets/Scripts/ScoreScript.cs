@@ -12,12 +12,17 @@ public class ScoreScript : MonoBehaviour {
     GameObject textChild;
     Image squareChild;
 
-    Color targetColour = Color.clear;
+    GameObject retryChild;
+
+    Color squareColour = Color.clear;
 
 	void Start () {
 
         textChild = GameObject.Find("ScoreText");
         squareChild = GetComponentInChildren<Image>();
+        retryChild = GameObject.Find("Retry");
+
+        retryChild.SetActive(false);
 
         bottomCorner = new Vector3(-140, -255, 0);
         screenMiddle = Vector3.zero;
@@ -29,20 +34,24 @@ public class ScoreScript : MonoBehaviour {
 
         textChild.transform.localPosition = Vector3.Lerp(textChild.transform.localPosition, targetPosition, 0.08f);
 
-        squareChild.color = Color.Lerp(squareChild.color, targetColour, 0.8f);
+        squareChild.color = Color.Lerp(squareChild.color, squareColour, 0.8f);
 	}
 
     public void EndGame()
     {
         targetPosition = screenMiddle;
 
-        targetColour = new Color(0, 0, 0, 0.5f);
+        squareColour = new Color(0, 0, 0, 0.5f);
+
+        retryChild.SetActive(true);
     }
 
     public void StartGame()
     {
         targetPosition = bottomCorner;
 
-        targetColour = Color.clear;
+        squareColour = Color.clear;
+
+        retryChild.SetActive(false);
     }
 }

@@ -34,4 +34,10 @@ public class CameraScript : MonoBehaviour {
     {
         canFollow = i;
     }
+
+    public void Restart()
+    {
+        canFollow = true;
+        transform.position = player.transform.position + relativeToPlayer;
+    }
 }

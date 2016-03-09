@@ -11,6 +11,8 @@ public class NodeSemiScript : MonoBehaviour {
 
     SpriteRenderer myRenderer;
 
+    bool paused = false;
+
 	void Start () {
 
 	}
@@ -23,7 +25,10 @@ public class NodeSemiScript : MonoBehaviour {
     }
 
 	void Update () {
-	
+
+        if (paused)
+            return;
+
         if (moving)
         {
             if (rotateRight)
@@ -56,5 +61,10 @@ public class NodeSemiScript : MonoBehaviour {
     {
         targetColour = newColor;
         myRenderer.color = newColor;
+    }
+
+    public void Pause(bool isPaused)
+    {
+        paused = isPaused;
     }
 }

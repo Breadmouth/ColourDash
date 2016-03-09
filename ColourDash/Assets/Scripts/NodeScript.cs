@@ -14,9 +14,11 @@ public class NodeScript : MonoBehaviour {
 
     int rgbDecider;
 
+    bool paused = false;
+
 	void Start () {
 
-        targetScale = new Vector3(0.7f, 0.7f, 0.7f);
+        targetScale = new Vector3(0.8f, 0.8f, 0.8f);
 
         child1 = GetComponentsInChildren<NodeSemiScript>()[0];
         child2 = GetComponentsInChildren<NodeSemiScript>()[1];
@@ -37,6 +39,9 @@ public class NodeScript : MonoBehaviour {
 	}
 
 	void Update () {
+
+        if (paused)
+            return;
 
         transform.localScale = Vector3.Lerp(transform.localScale, targetScale, 0.05f);
 
@@ -64,5 +69,13 @@ public class NodeScript : MonoBehaviour {
     {
         child1.BeginSpin();
         child2.BeginSpin();
+    }
+
+    public void Pause(bool isPaused)
+    {
+        paused = isPaused;
+
+        child1.Pause(paused);
+        child2.Pause(paused);
     }
 }
