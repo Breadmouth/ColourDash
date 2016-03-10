@@ -47,7 +47,7 @@ public class NodeSemiScript : MonoBehaviour {
 
     public void Die()
     {
-        GetComponent<Collider2D>().enabled = false;
+        transform.tag = "Player";
 
         targetColour = Color.clear;
     }

@@ -11,4 +11,4 @@ google play integration
 collectables/coins on nodes
 
 BUGS:
-random CTD (entire unity crash)
+------------random CTD (entire unity crash)

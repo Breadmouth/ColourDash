@@ -72,7 +72,7 @@ public class PlayerScript : MonoBehaviour {
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, 0.12f);
 
-        if ((transform.position - targetPosition).magnitude < 0.01f && canMove == false)
+        if ((transform.position - targetPosition).magnitude < 0.015f && canMove == false)
         {
             if (touchNode)
             {
@@ -105,7 +105,7 @@ public class PlayerScript : MonoBehaviour {
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (paused)
             return;

@@ -30,11 +30,9 @@ public class GameControllerScript : MonoBehaviour {
         nodeArray[4] = newNode;
 
         nodeArray[2].GetComponent<NodeScript>().SetnextNode(nodeArray[3]);
-        nodeArray[3].transform.LookAt(nodeArray[2].transform);
-        nodeArray[3].transform.Rotate(transform.forward, 270);
+        nodeArray[3].GetComponent<NodeScript>().SetLookPos(nodeArray[2].transform.position);
         nodeArray[3].GetComponent<NodeScript>().SetnextNode(nodeArray[4]);
-        nodeArray[4].transform.LookAt(nodeArray[3].transform);
-        nodeArray[4].transform.Rotate(transform.forward, 270);
+        nodeArray[4].GetComponent<NodeScript>().SetLookPos(nodeArray[3].transform.position);
 	}
 
     public void CreateNewNode()
@@ -48,8 +46,7 @@ public class GameControllerScript : MonoBehaviour {
             nodeArray[0] = newNode;
 
             nodeArray[4].GetComponent<NodeScript>().SetnextNode(nodeArray[0]);
-            nodeArray[0].transform.LookAt(nodeArray[4].transform);
-            nodeArray[0].transform.Rotate(transform.forward, 270);
+            nodeArray[0].GetComponent<NodeScript>().SetLookPos(nodeArray[4].transform.position);
 
             nextNodeID = 0;
         }
@@ -59,8 +56,7 @@ public class GameControllerScript : MonoBehaviour {
             nodeArray[nextNodeID + 1] = newNode;
 
             nodeArray[nextNodeID].GetComponent<NodeScript>().SetnextNode(nodeArray[nextNodeID + 1]);
-            nodeArray[nextNodeID + 1].transform.LookAt(nodeArray[nextNodeID].transform);
-            nodeArray[nextNodeID + 1].transform.Rotate(transform.forward, 270);
+            nodeArray[nextNodeID + 1].GetComponent<NodeScript>().SetLookPos(nodeArray[nextNodeID].transform.position);
 
             nextNodeID++;
         }
@@ -107,10 +103,8 @@ public class GameControllerScript : MonoBehaviour {
 
         nodeArray[2].transform.rotation = Quaternion.Euler(new Vector3(90, 180, 0));
         nodeArray[2].GetComponent<NodeScript>().SetnextNode(nodeArray[3]);
-        nodeArray[3].transform.LookAt(nodeArray[2].transform);
-        nodeArray[3].transform.Rotate(transform.forward, 270);
+        nodeArray[3].GetComponent<NodeScript>().SetLookPos(nodeArray[2].transform.position);
         nodeArray[3].GetComponent<NodeScript>().SetnextNode(nodeArray[4]);
-        nodeArray[4].transform.LookAt(nodeArray[3].transform);
-        nodeArray[4].transform.Rotate(transform.forward, 270);
+        nodeArray[4].GetComponent<NodeScript>().SetLookPos(nodeArray[3].transform.position);
     }
 }

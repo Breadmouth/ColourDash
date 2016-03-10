@@ -54,15 +54,18 @@ public class NodeScript : MonoBehaviour {
 
         targetScale = new Vector3(0.3f, 0.3f, 0.3f);
 
-        GetComponent<Collider2D>().enabled = false;
-
         nextNode.GetComponent<NodeScript>().BeginSpin();
-        //change node colour?
     }
 
     public void SetnextNode(GameObject node)
     {
         nextNode = node;
+    }
+
+    public void SetLookPos(Vector3 pos)
+    {
+        transform.LookAt(pos);
+        transform.Rotate(Vector3.forward, 270);
     }
 
     public void BeginSpin()
