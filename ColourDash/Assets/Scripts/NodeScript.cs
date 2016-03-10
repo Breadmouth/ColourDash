@@ -10,6 +10,8 @@ public class NodeScript : MonoBehaviour {
     NodeSemiScript child1;
     NodeSemiScript child2;
 
+    PowerUpScript powerUpChild;
+
     Color randomColour;
 
     int rgbDecider;
@@ -18,10 +20,18 @@ public class NodeScript : MonoBehaviour {
 
 	void Start () {
 
-        targetScale = new Vector3(0.8f, 0.8f, 0.8f);
+        targetScale = new Vector3(0.9f, 0.9f, 0.9f);
 
         child1 = GetComponentsInChildren<NodeSemiScript>()[0];
         child2 = GetComponentsInChildren<NodeSemiScript>()[1];
+
+        powerUpChild = GetComponentInChildren<PowerUpScript>();
+
+        float childActive = Random.Range(0, 13.0f);
+        if (childActive > 1.0f)
+        {
+            powerUpChild.Active(false);
+        }
 
         rgbDecider = (int)Random.Range(0, 2.99f);
 
@@ -52,7 +62,7 @@ public class NodeScript : MonoBehaviour {
         child1.Die();
         child2.Die();
 
-        targetScale = new Vector3(0.3f, 0.3f, 0.3f);
+        targetScale = new Vector3(0.4f, 0.4f, 0.4f);
 
         nextNode.GetComponent<NodeScript>().BeginSpin();
     }

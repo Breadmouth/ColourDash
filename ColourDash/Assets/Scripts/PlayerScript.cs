@@ -19,8 +19,10 @@ public class PlayerScript : MonoBehaviour {
     float rotationDir = 1.0f;
 
     Text scoreText;
+    Text bestScoreText;
 
     int score = 0;
+    int bestScore = 0;
 
     GameObject currentNode;
 
@@ -28,20 +30,41 @@ public class PlayerScript : MonoBehaviour {
 
     bool paused = false;
 
+    bool pointMultiplier = false;
+
+    float powerUpTime = 10.0f;
+    float powerUpCountdown = 0.0f;
+
+    GameObject aimer;
+
 	void Start () {
 
         mainCamera = GameObject.Find("MainCamera").GetComponent<CameraScript>();
         gameController = GameObject.Find("MainCamera").GetComponent<GameControllerScript>();
 
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+        bestScoreText = GameObject.Find("BestScore").GetComponent<Text>();
 
         scoreScript = GameObject.Find("Overlay").GetComponent<ScoreScript>();
+
+        aimer = GameObject.Find("Aimer");
+
+        aimer.SetActive(false);
 	}
 
 	void Update () {
 
         if (paused)
             return;
+
+        if (powerUpCountdown > 0)
+            powerUpCountdown -= Time.deltaTime;
+        else if (powerUpCountdown < 0)
+        {
+            powerUpCountdown = 0;
+            aimer.SetActive(false);
+            pointMultiplier = false;
+        }
 
         if (Input.touchCount > 0)
         {
@@ -123,6 +146,19 @@ public class PlayerScript : MonoBehaviour {
             Restart();
             return;
         }
+        else if (other.tag == "PowerUp")
+        {
+            if (other.GetComponent<PowerUpScript>().powerUpType == 0)
+            {
+                EnableAimer();
+            }
+            else
+            {
+                EnablePointMulitplier();
+            }
+
+            Destroy(other.gameObject);
+        }
     }
 
     void Restart()
@@ -138,6 +174,9 @@ public class PlayerScript : MonoBehaviour {
     void UpdateScore()
     {
             score++;
+
+            if (pointMultiplier)
+                score++;
 
             scoreText.text = score.ToString();
     }
@@ -175,6 +214,12 @@ public class PlayerScript : MonoBehaviour {
         transform.position = Vector3.zero;
         targetPosition = Vector3.zero;
 
+        if (score > bestScore)
+        {
+            bestScore = score;
+            bestScoreText.text = bestScore.ToString();
+        }
+
         canMove = true;
         rotateSpeed = 100.0f;
         touchNode = false;
@@ -182,5 +227,19 @@ public class PlayerScript : MonoBehaviour {
         score = 0;
         scoreText.text = score.ToString();
         mainCamera.Restart();
+    }
+
+    void EnableAimer()
+    {
+        aimer.SetActive(true);
+
+        powerUpCountdown = powerUpTime;
+    }
+
+    void EnablePointMulitplier()
+    {
+        pointMultiplier = true;
+
+        powerUpCountdown = powerUpTime;
     }
 }

@@ -1,6 +1,6 @@
 TODO:
 ------------player trail
-powerup - laser pointer, slower gate
+------------powerup - laser pointer, point multiplier
 faster actions = point multiplier
 ------------points
 ------------brighter colours

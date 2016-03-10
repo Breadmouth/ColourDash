@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\NodeScript.cs" />
     <Compile Include="Assets\Scripts\NodeSemiScript.cs" />
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
+    <Compile Include="Assets\Scripts\PowerUpScript.cs" />
     <Compile Include="Assets\Scripts\ScoreScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />

@@ -24,8 +24,8 @@ public class ScoreScript : MonoBehaviour {
 
         retryChild.SetActive(false);
 
-        bottomCorner = new Vector3(-140, -255, 0);
-        screenMiddle = Vector3.zero;
+        bottomCorner = new Vector3(-140, -270, 0);
+        screenMiddle = new Vector3(0, 50, 0); ;
 
         targetPosition = bottomCorner;
 	}
