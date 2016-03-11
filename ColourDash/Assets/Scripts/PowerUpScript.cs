@@ -15,7 +15,7 @@ public class PowerUpScript : MonoBehaviour {
 
 	void Update () {
 
-        transform.Rotate(transform.forward, 40.0f * Time.deltaTime);
+        transform.Rotate(transform.forward, 70.0f * Time.deltaTime);
 	}
 
     public void Active(bool isActive)

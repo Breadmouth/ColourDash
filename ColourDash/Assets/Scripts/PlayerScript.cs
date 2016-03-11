@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour {
 
     Text scoreText;
     Text bestScoreText;
+    Text powerUpText;
 
     int score = 0;
     int bestScore = 0;
@@ -44,12 +45,19 @@ public class PlayerScript : MonoBehaviour {
 
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
         bestScoreText = GameObject.Find("BestScore").GetComponent<Text>();
+        powerUpText = GameObject.Find("PowerUpText").GetComponent<Text>();
 
         scoreScript = GameObject.Find("Overlay").GetComponent<ScoreScript>();
 
         aimer = GameObject.Find("Aimer");
 
         aimer.SetActive(false);
+
+        if (PlayerPrefs.HasKey("bestScore"))
+        {
+            bestScore = PlayerPrefs.GetInt("bestScore");
+            bestScoreText.text = bestScore.ToString();
+        }
 	}
 
 	void Update () {
@@ -64,6 +72,7 @@ public class PlayerScript : MonoBehaviour {
             powerUpCountdown = 0;
             aimer.SetActive(false);
             pointMultiplier = false;
+            powerUpText.text = "";
         }
 
         if (Input.touchCount > 0)
@@ -218,6 +227,8 @@ public class PlayerScript : MonoBehaviour {
         {
             bestScore = score;
             bestScoreText.text = bestScore.ToString();
+
+            PlayerPrefs.SetInt("bestScore", bestScore);
         }
 
         canMove = true;
@@ -234,6 +245,8 @@ public class PlayerScript : MonoBehaviour {
         aimer.SetActive(true);
 
         powerUpCountdown = powerUpTime;
+
+        powerUpText.text = "AIM ASSIST";
     }
 
     void EnablePointMulitplier()
@@ -241,5 +254,7 @@ public class PlayerScript : MonoBehaviour {
         pointMultiplier = true;
 
         powerUpCountdown = powerUpTime;
+
+        powerUpText.text = "POINT MULTIPLIER";
     }
 }
