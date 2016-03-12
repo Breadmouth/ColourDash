@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -58,6 +60,23 @@ public class PlayerScript : MonoBehaviour {
             bestScore = PlayerPrefs.GetInt("bestScore");
             bestScoreText.text = bestScore.ToString();
         }
+
+        scoreScript.Menu(true);
+
+        Pause(true);
+
+        // authenticate user:
+        Social.localUser.Authenticate((bool success) => {
+            // handle success or failure
+            if (success)
+            {
+                Debug.Log("success");
+            }
+            else
+            {
+                Debug.Log("fail");
+            }
+        });
 	}
 
 	void Update () {
@@ -213,9 +232,15 @@ public class PlayerScript : MonoBehaviour {
         gameController.Pause(isPaused);
     }
 
+    public void EnterMenu()
+    {
+        scoreScript.Menu(true);
+    }
+
     public void Reset()
     {
         Pause(false);
+        scoreScript.Menu(false);
 
         gameController.Restart();
         scoreScript.StartGame();
@@ -238,6 +263,11 @@ public class PlayerScript : MonoBehaviour {
         score = 0;
         scoreText.text = score.ToString();
         mainCamera.Restart();
+
+        aimer.SetActive(false);
+        pointMultiplier = false;
+        powerUpCountdown = 0;
+        powerUpText.text = "";
     }
 
     void EnableAimer()

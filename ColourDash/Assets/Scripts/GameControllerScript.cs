@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
 
 public class GameControllerScript : MonoBehaviour {
 
@@ -13,7 +16,20 @@ public class GameControllerScript : MonoBehaviour {
 
     int nextNodeID = 4;
 
-	void Start () {
+    void Awake()
+    {
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+            // enables saving game progress.
+            .EnableSavedGames()
+            // require access to a player's Google+ social graph to sign in
+            .RequireGooglePlus()
+            .Build();
+
+        PlayGamesPlatform.InitializeInstance(config);
+        // recommended for debugging:
+        PlayGamesPlatform.DebugLogEnabled = true;
+        // Activate the Google Play Games platform
+        PlayGamesPlatform.Activate();
 
         nodeArray = new GameObject[5];
 
@@ -33,6 +49,10 @@ public class GameControllerScript : MonoBehaviour {
         nodeArray[3].GetComponent<NodeScript>().SetLookPos(nodeArray[2].transform.position);
         nodeArray[3].GetComponent<NodeScript>().SetnextNode(nodeArray[4]);
         nodeArray[4].GetComponent<NodeScript>().SetLookPos(nodeArray[3].transform.position);
+    }
+
+	void Start () {
+
 	}
 
     public void CreateNewNode()

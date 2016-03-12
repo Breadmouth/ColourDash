@@ -3,11 +3,14 @@ TODO:
 ------------powerup - laser pointer, point multiplier
 ------------points
 ------------brighter colours
-menu screen
+------------menu screen
 ------------touch controls
-google play integration
+------------google play integration
 ------------limit player rotation
-collectables/coins on nodes
+game logo for menu screen
+alpha testing
+cleaning code
+position canvas based on screen resolution?
 
 BUGS:
 ------------random CTD (entire unity crash)

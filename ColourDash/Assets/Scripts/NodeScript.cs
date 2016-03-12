@@ -18,8 +18,8 @@ public class NodeScript : MonoBehaviour {
 
     bool paused = false;
 
-	void Start () {
-
+    void Awake()
+    {
         targetScale = new Vector3(0.9f, 0.9f, 0.9f);
 
         child1 = GetComponentsInChildren<NodeSemiScript>()[0];
@@ -42,10 +42,13 @@ public class NodeScript : MonoBehaviour {
         else
             randomColour = new Color(Random.Range(0.4f, 0.8f), Random.Range(0.4f, 0.8f), Random.Range(0.8f, 1));
 
+        GetComponent<Renderer>().material.color = randomColour * 0.35f;
+    }
+
+	void Start () {
+
         child1.SetColor(randomColour);
         child2.SetColor(randomColour);
-
-        GetComponent<Renderer>().material.color = randomColour * 0.35f;
 	}
 
 	void Update () {
