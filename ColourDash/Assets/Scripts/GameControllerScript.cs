@@ -9,11 +9,9 @@ public class GameControllerScript : MonoBehaviour {
     //Have 5 nodes at one time
 
     public GameObject nodePrefab;
-
-    float nextNodeY = 6.0f;
-
     GameObject[] nodeArray;
 
+    float nextNodeY = 6.0f;
     int nextNodeID = 4;
 
     void Awake()
@@ -50,10 +48,6 @@ public class GameControllerScript : MonoBehaviour {
         nodeArray[3].GetComponent<NodeScript>().SetnextNode(nodeArray[4]);
         nodeArray[4].GetComponent<NodeScript>().SetLookPos(nodeArray[3].transform.position);
     }
-
-	void Start () {
-
-	}
 
     public void CreateNewNode()
     {

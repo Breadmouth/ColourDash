@@ -10,19 +10,13 @@ public class ScoreScript : MonoBehaviour {
 
     Vector3 targetPosition;
 
-    GameObject textChild;
     Image squareChild;
-
+    GameObject textChild;
     GameObject retryChild;
     GameObject menuPlayChild;
     GameObject enterMenuChild;
 
     Color squareColour = Color.clear;
-
-    void Awake()
-    {
-
-    }
 
 	void Start () {
 
@@ -89,6 +83,7 @@ public class ScoreScript : MonoBehaviour {
         {
             squareColour = Color.clear;
             targetPosition = bottomCorner;
+            textChild.transform.localPosition = targetPosition;
             menuPlayChild.SetActive(false);
         }
     }

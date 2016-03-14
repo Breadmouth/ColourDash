@@ -3,9 +3,11 @@ using System.Collections;
 
 public class PowerUpScript : MonoBehaviour {
 
-    float rotateSpeed = 40.0f;
+    float rotateSpeed = 70.0f;
 
     public int powerUpType;
+
+    bool pause = false;
 
 	void Start () {
 
@@ -15,11 +17,17 @@ public class PowerUpScript : MonoBehaviour {
 
 	void Update () {
 
-        transform.Rotate(transform.forward, 70.0f * Time.deltaTime);
+        if (!pause)
+            transform.Rotate(transform.forward, rotateSpeed * Time.deltaTime);
 	}
 
     public void Active(bool isActive)
     {
         gameObject.SetActive(isActive);
+    }
+
+    public void Pause(bool isPaused)
+    {
+        pause = isPaused;
     }
 }

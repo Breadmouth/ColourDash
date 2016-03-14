@@ -7,38 +7,33 @@ using UnityEngine.SocialPlatforms;
 
 public class PlayerScript : MonoBehaviour {
 
-    bool canMove = true;
     Vector3 targetPosition = Vector3.zero;
 
     CameraScript mainCamera;
 
     GameControllerScript gameController;
 
-    float rotateSpeed = 100.0f;
+    GameObject currentNode;
+    GameObject aimer;
 
-    bool touchNode = false;
-
-    float rotationDir = 1.0f;
+    ScoreScript scoreScript;
 
     Text scoreText;
     Text bestScoreText;
     Text powerUpText;
 
-    int score = 0;
-    int bestScore = 0;
-
-    GameObject currentNode;
-
-    ScoreScript scoreScript;
-
+    bool touchNode = false;
+    bool canMove = true;
     bool paused = false;
-
     bool pointMultiplier = false;
 
+    float rotationDir = 1.0f;
     float powerUpTime = 10.0f;
     float powerUpCountdown = 0.0f;
+    float rotateSpeed = 100.0f;
 
-    GameObject aimer;
+    int score = 0;
+    int bestScore = 0;
 
 	void Start () {
 
@@ -70,11 +65,11 @@ public class PlayerScript : MonoBehaviour {
             // handle success or failure
             if (success)
             {
-                Debug.Log("success");
+                
             }
             else
             {
-                Debug.Log("fail");
+                
             }
         });
 	}
@@ -191,9 +186,6 @@ public class PlayerScript : MonoBehaviour {
 
     void Restart()
     {
-        //need proper restart rather than loadscene
-        //SceneManager.LoadScene(0, LoadSceneMode.Single);
-
         Pause(true);
 
         scoreScript.EndGame();
@@ -201,12 +193,12 @@ public class PlayerScript : MonoBehaviour {
 
     void UpdateScore()
     {
+        score++;
+
+        if (pointMultiplier)
             score++;
 
-            if (pointMultiplier)
-                score++;
-
-            scoreText.text = score.ToString();
+        scoreText.text = score.ToString();
     }
 
     void ReachNode()
@@ -223,6 +215,8 @@ public class PlayerScript : MonoBehaviour {
         gameController.CreateNewNode();
 
         rotateSpeed += 2.0f;
+
+        //mainCamera.ScreenBounce();
     }
 
     void Pause(bool isPaused)

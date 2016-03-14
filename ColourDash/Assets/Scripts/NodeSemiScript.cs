@@ -3,14 +3,13 @@ using System.Collections;
 
 public class NodeSemiScript : MonoBehaviour {
 
-    public bool rotateRight;
-
-    bool moving = false;
-
     Color targetColour;
 
     SpriteRenderer myRenderer;
 
+    public bool rotateRight;
+
+    bool moving = false;
     bool paused = false;
 
 	void Start () {
@@ -33,11 +32,11 @@ public class NodeSemiScript : MonoBehaviour {
         {
             if (rotateRight)
             {
-                transform.Rotate(transform.forward, 18.0f * Time.deltaTime);
+                transform.Rotate(transform.forward, 25.0f * Time.deltaTime);
             }
             else
             {
-                transform.Rotate(transform.forward, -18.0f * Time.deltaTime);
+                transform.Rotate(transform.forward, -25.0f * Time.deltaTime);
             }
         }
 

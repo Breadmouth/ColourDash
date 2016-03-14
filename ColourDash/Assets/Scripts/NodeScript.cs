@@ -14,6 +14,8 @@ public class NodeScript : MonoBehaviour {
 
     Color randomColour;
 
+    CameraScript mainCamera;
+
     int rgbDecider;
 
     bool paused = false;
@@ -26,6 +28,8 @@ public class NodeScript : MonoBehaviour {
         child2 = GetComponentsInChildren<NodeSemiScript>()[1];
 
         powerUpChild = GetComponentInChildren<PowerUpScript>();
+
+        mainCamera = GameObject.Find("MainCamera").GetComponent<CameraScript>();
 
         float childActive = Random.Range(0, 13.0f);
         if (childActive > 1.0f)
@@ -42,7 +46,7 @@ public class NodeScript : MonoBehaviour {
         else
             randomColour = new Color(Random.Range(0.4f, 0.8f), Random.Range(0.4f, 0.8f), Random.Range(0.8f, 1));
 
-        GetComponent<Renderer>().material.color = randomColour * 0.35f;
+        GetComponentInChildren<SpriteRenderer>().color = randomColour * 0.45f;
     }
 
 	void Start () {
@@ -65,9 +69,16 @@ public class NodeScript : MonoBehaviour {
         child1.Die();
         child2.Die();
 
+        if (powerUpChild != null && powerUpChild.enabled)
+        {
+            GameObject.Destroy(powerUpChild.gameObject);
+        }
+
         targetScale = new Vector3(0.4f, 0.4f, 0.4f);
 
         nextNode.GetComponent<NodeScript>().BeginSpin();
+
+        mainCamera.LookTowards(nextNode);
     }
 
     public void SetnextNode(GameObject node)
@@ -93,5 +104,8 @@ public class NodeScript : MonoBehaviour {
 
         child1.Pause(paused);
         child2.Pause(paused);
+
+        if (powerUpChild != null)
+            powerUpChild.Pause(paused);
     }
 }
