@@ -9,8 +9,12 @@ TODO:
 ------------limit player rotation
 game logo for menu screen
 alpha testing
-cleaning code
 position canvas based on screen resolution?
+
+brighter colours again (shader?)
+more spice
+more juice
+new font
 
 BUGS:
 ------------random CTD (entire unity crash)

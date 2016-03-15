@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColourDash.CSharp.Plugins", "ColourDash.CSharp.Plugins.csproj", "{76AE4296-8E8E-F629-FD97-C5A41328A5D5}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColourDash.CSharp", "ColourDash.CSharp.csproj", "{33F92CD8-FA28-7DC1-3126-A0B6D01BDC24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColourDash.CSharp.Editor", "ColourDash.CSharp.Editor.csproj", "{DC4A2E75-4810-8816-65E8-8EC3E2A2A92C}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76AE4296-8E8E-F629-FD97-C5A41328A5D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76AE4296-8E8E-F629-FD97-C5A41328A5D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76AE4296-8E8E-F629-FD97-C5A41328A5D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76AE4296-8E8E-F629-FD97-C5A41328A5D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33F92CD8-FA28-7DC1-3126-A0B6D01BDC24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33F92CD8-FA28-7DC1-3126-A0B6D01BDC24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F92CD8-FA28-7DC1-3126-A0B6D01BDC24}.Release|Any CPU.ActiveCfg = Release|Any CPU

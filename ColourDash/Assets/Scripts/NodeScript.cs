@@ -46,7 +46,7 @@ public class NodeScript : MonoBehaviour {
         else
             randomColour = new Color(Random.Range(0.4f, 0.8f), Random.Range(0.4f, 0.8f), Random.Range(0.8f, 1));
 
-        GetComponentInChildren<SpriteRenderer>().color = randomColour * 0.45f;
+        GetComponentInChildren<SpriteRenderer>().color = new Color(randomColour.r * 0.45f, randomColour.g * 0.45f, randomColour.b * 0.45f, 1);
     }
 
 	void Start () {

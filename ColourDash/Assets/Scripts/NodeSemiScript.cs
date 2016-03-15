@@ -38,6 +38,12 @@ public class NodeSemiScript : MonoBehaviour {
             {
                 transform.Rotate(transform.forward, -25.0f * Time.deltaTime);
             }
+
+            if (transform.localRotation.eulerAngles.y > 270 || transform.localRotation.eulerAngles.y < 90)
+            {
+                //gates closed, end game
+                GameObject.Find("Player").GetComponent<PlayerScript>().Restart();
+            }
         }
 
         myRenderer.color = Color.Lerp(myRenderer.color, targetColour, 0.05f);
@@ -49,6 +55,8 @@ public class NodeSemiScript : MonoBehaviour {
         transform.tag = "Player";
 
         targetColour = Color.clear;
+
+        moving = false;
     }
 
     public void BeginSpin()
