@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PowerUpScript : MonoBehaviour {
 
-    float rotateSpeed = 70.0f;
+    float rotateSpeed = 120.0f;
 
     public int powerUpType;
 

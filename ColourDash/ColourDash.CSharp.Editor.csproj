@@ -149,10 +149,12 @@
     <Compile Include="Assets\PlayServicesResolver\Editor\SettingsDialog.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\AdMobPlugin\LICENSE.txt" />
     <None Include="Assets\GooglePlayGames\Editor\Podfile.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\MainLibProj\AndroidManifest.xml" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />

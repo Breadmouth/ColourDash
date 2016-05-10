@@ -32,11 +32,11 @@ public class NodeSemiScript : MonoBehaviour {
         {
             if (rotateRight)
             {
-                transform.Rotate(transform.forward, 25.0f * Time.deltaTime);
+                transform.Rotate(transform.forward, 28.0f * Time.deltaTime);
             }
             else
             {
-                transform.Rotate(transform.forward, -25.0f * Time.deltaTime);
+                transform.Rotate(transform.forward, -28.0f * Time.deltaTime);
             }
 
             if (transform.localRotation.eulerAngles.y > 270 || transform.localRotation.eulerAngles.y < 90)

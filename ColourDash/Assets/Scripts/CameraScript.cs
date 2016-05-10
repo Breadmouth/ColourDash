@@ -21,7 +21,7 @@ public class CameraScript : MonoBehaviour {
         player = GameObject.Find("Player");
 
         //position relative to the object we are following
-        relativeToPlayer = new Vector3(0.0f, 2.5f, -10.0f);
+        relativeToPlayer = new Vector3(0.0f, 3.2f, -10.0f);
 
         myCamera = GetComponent<Camera>();
 	}
@@ -37,7 +37,7 @@ public class CameraScript : MonoBehaviour {
 
         if (canFollow)
         {
-            relativeToPlayer = (transform.up * 2.5f) + new Vector3(0, 0, -10);
+            relativeToPlayer = (transform.up * 3.2f) + new Vector3(0, 0, -10);
             //lerp towards the player position
             transform.position = Vector3.Lerp(transform.position, player.transform.position + relativeToPlayer, 0.15f);
         }
@@ -71,7 +71,7 @@ public class CameraScript : MonoBehaviour {
         Quaternion oldRot = transform.rotation;
 
         transform.rotation = Quaternion.Euler(Vector3.zero);
-        transform.Rotate(transform.forward, angleDeg / 4.0f);
+        transform.Rotate(transform.forward, angleDeg / 3.0f);
 
         targetRotation = transform.rotation;
         transform.rotation = oldRot;

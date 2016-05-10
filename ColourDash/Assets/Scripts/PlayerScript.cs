@@ -4,8 +4,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
+using GooglePlayGames.BasicApi;
 
 public class PlayerScript : MonoBehaviour {
+
+    int firstDeath;
+    int powerUpCounter = 0;
 
     Vector3 targetPosition = Vector3.zero;
 
@@ -30,8 +34,9 @@ public class PlayerScript : MonoBehaviour {
 
     float rotationDir = 1.0f;
     float powerUpTime = 10.0f;
-    float powerUpCountdown = 0.0f;
-    float rotateSpeed = 120.0f;
+    float multiplierCountdown = 0.0f;
+    float aimerCountdown = 0.0f;
+    float rotateSpeed = 180.0f;
 
     int score = 0;
     int bestScore = 0;
@@ -58,6 +63,11 @@ public class PlayerScript : MonoBehaviour {
             bestScoreText.text = bestScore.ToString();
         }
 
+        if (PlayerPrefs.HasKey("firstDeath"))
+        {
+            firstDeath = PlayerPrefs.GetInt("FirstDeath");
+        }
+
         scoreScript.Menu(true);
 
         Pause(true);
@@ -66,13 +76,7 @@ public class PlayerScript : MonoBehaviour {
         Social.localUser.Authenticate((bool success) => {
             // handle success or failure
             if (success)
-            {
-                
-            }
-            else
-            {
-                
-            }
+            {}
         });
 	}
 
@@ -81,14 +85,23 @@ public class PlayerScript : MonoBehaviour {
         if (paused)
             return;
 
-        if (powerUpCountdown > 0)
-            powerUpCountdown -= Time.deltaTime;
-        else if (powerUpCountdown < 0)
+        if (multiplierCountdown > 0)
+            multiplierCountdown -= Time.deltaTime;
+        else if (multiplierCountdown < 0)
         {
-            powerUpCountdown = 0;
-            aimer.SetActive(false);
+            multiplierCountdown = 0;
             pointMultiplier = false;
-            powerUpText.text = "";
+            if (aimerCountdown <= 0)
+                powerUpText.text = "";
+        }
+        if (aimerCountdown > 0)
+            aimerCountdown -= Time.deltaTime;
+        else if (aimerCountdown < 0)
+        {
+            aimerCountdown = 0;
+            aimer.SetActive(false);
+            if (multiplierCountdown <= 0)
+                powerUpText.text = "";
         }
 
         if (Input.touchCount > 0)
@@ -183,11 +196,28 @@ public class PlayerScript : MonoBehaviour {
             }
 
             Destroy(other.gameObject);
+
+            powerUpCounter++;
+
+            scoreScript.FlashWhite();
         }
     }
 
     public void Restart()
     {
+        if (firstDeath == 0)
+        {
+            Social.ReportProgress("CgkIlMWJ8uoBEAIQAQ", 100.0f, (bool success) =>
+            {
+                // handle success or failure
+            });
+
+            firstDeath = 1;
+            PlayerPrefs.SetInt("firstDeath", 1);
+        }
+
+        scoreScript.FlashRed();
+
         Pause(true);
 
         powerUpText.text = "";
@@ -203,6 +233,8 @@ public class PlayerScript : MonoBehaviour {
             score++;
 
         scoreText.text = score.ToString();
+
+        scoreScript.BounceText();
     }
 
     void ReachNode()
@@ -253,8 +285,51 @@ public class PlayerScript : MonoBehaviour {
             bestScoreText.text = bestScore.ToString();
 
             PlayerPrefs.SetInt("bestScore", bestScore);
+
+            Social.ReportScore(bestScore, "CgkIlMWJ8uoBEAIQBg", (bool success) =>
+            {
+                // handle success or failure
+            });
+
+            if (score >= 10)
+            {
+                Social.ReportProgress("CgkIlMWJ8uoBEAIQAg", 100.0f, (bool success) =>
+                {
+                    // handle success or failure
+                });
+            }
+            if (score >= 50)
+            {
+                Social.ReportProgress("CgkIlMWJ8uoBEAIQAw", 100.0f, (bool success) =>
+                {
+                    // handle success or failure
+                });
+            }
+            if (score >= 100)
+            {
+                Social.ReportProgress("CgkIlMWJ8uoBEAIQBA", 100.0f, (bool success) =>
+                {
+                    // handle success or failure
+                });
+            }
         }
 
+        if (powerUpCounter >= 3)
+        {
+            Social.ReportProgress("CgkIlMWJ8uoBEAIQBQ", 100.0f, (bool success) =>
+            {
+                // handle success or failure
+            });
+        }
+        if (powerUpCounter >= 5)
+        {
+            Social.ReportProgress("CgkIlMWJ8uoBEAIQCA", 100.0f, (bool success) =>
+            {
+                // handle success or failure
+            });
+        }
+
+        powerUpCounter = 0;
         canMove = true;
         rotateSpeed = 120.0f;
         touchNode = false;
@@ -265,14 +340,15 @@ public class PlayerScript : MonoBehaviour {
 
         aimer.SetActive(false);
         pointMultiplier = false;
-        powerUpCountdown = 0;
+        aimerCountdown = 0;
+        multiplierCountdown = 0;
     }
 
     void EnableAimer()
     {
         aimer.SetActive(true);
 
-        powerUpCountdown = powerUpTime;
+        aimerCountdown = powerUpTime;
 
         powerUpText.text = "AIM ASSIST";
     }
@@ -281,8 +357,28 @@ public class PlayerScript : MonoBehaviour {
     {
         pointMultiplier = true;
 
-        powerUpCountdown = powerUpTime;
+        multiplierCountdown = powerUpTime;
 
         powerUpText.text = "POINT MULTIPLIER";
+    }
+
+    public void ShowLeaderboard()
+    {
+        Social.ShowLeaderboardUI();
+    }
+
+    public void ShowAchievements()
+    {
+        Social.ShowAchievementsUI();
+    }
+
+    public void Login()
+    {
+        Social.localUser.Authenticate((bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {}
+        });
     }
 }

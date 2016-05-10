@@ -69,6 +69,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AdMobPlugin\Scripts\AdMobPlugin.cs" />
+    <Compile Include="Assets\AdMobPlugin\Scripts\AdMobPluginDebug.cs" />
+    <Compile Include="Assets\AdMobPlugin\Scripts\AdMobPluginMockup.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
@@ -252,10 +255,12 @@
     <Compile Include="Assets\Scripts\ScoreScript.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\AdMobPlugin\LICENSE.txt" />
     <None Include="Assets\GooglePlayGames\Editor\Podfile.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\MainLibProj\AndroidManifest.xml" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />

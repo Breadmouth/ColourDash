@@ -10,6 +10,8 @@ public class NodeScript : MonoBehaviour {
     NodeSemiScript child1;
     NodeSemiScript child2;
 
+    ParticleSystem particles;
+
     PowerUpScript powerUpChild;
 
     Color randomColour;
@@ -26,6 +28,8 @@ public class NodeScript : MonoBehaviour {
 
         child1 = GetComponentsInChildren<NodeSemiScript>()[0];
         child2 = GetComponentsInChildren<NodeSemiScript>()[1];
+
+        particles = GetComponent<ParticleSystem>();
 
         powerUpChild = GetComponentInChildren<PowerUpScript>();
 
@@ -47,6 +51,8 @@ public class NodeScript : MonoBehaviour {
             randomColour = new Color(Random.Range(0.4f, 0.8f), Random.Range(0.4f, 0.8f), Random.Range(0.8f, 1));
 
         GetComponentInChildren<SpriteRenderer>().color = new Color(randomColour.r * 0.45f, randomColour.g * 0.45f, randomColour.b * 0.45f, 1);
+
+        particles.startColor = randomColour;
     }
 
 	void Start () {
@@ -77,6 +83,8 @@ public class NodeScript : MonoBehaviour {
         targetScale = new Vector3(0.4f, 0.4f, 0.4f);
 
         nextNode.GetComponent<NodeScript>().BeginSpin();
+
+        particles.Play();
 
         mainCamera.LookTowards(nextNode);
     }

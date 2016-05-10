@@ -17,16 +17,13 @@ public class GameControllerScript : MonoBehaviour {
     void Awake()
     {
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-            // enables saving game progress.
-            .EnableSavedGames()
-            // require access to a player's Google+ social graph to sign in
-            .RequireGooglePlus()
+
             .Build();
 
-        PlayGamesPlatform.InitializeInstance(config);
-        // recommended for debugging:
-        PlayGamesPlatform.DebugLogEnabled = true;
-        // Activate the Google Play Games platform
+        //PlayGamesPlatform.InitializeInstance(config);
+        //// recommended for debugging:
+        //PlayGamesPlatform.DebugLogEnabled = true;
+        //// Activate the Google Play Games platform
         PlayGamesPlatform.Activate();
 
         nodeArray = new GameObject[5];

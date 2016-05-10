@@ -24,11 +24,14 @@
 
 public static class GPGSIds
 {
-        public const string achievement_5 = "CgkIpYbNsfcTEAIQBQ"; // <GPGSID>
-        public const string achievement_1 = "CgkIpYbNsfcTEAIQAQ"; // <GPGSID>
-        public const string achievement_2 = "CgkIpYbNsfcTEAIQAg"; // <GPGSID>
-        public const string achievement_3 = "CgkIpYbNsfcTEAIQAw"; // <GPGSID>
-        public const string achievement_4 = "CgkIpYbNsfcTEAIQBA"; // <GPGSID>
+        public const string achievement_overpowered = "CgkIlMWJ8uoBEAIQCA"; // <GPGSID>
+        public const string achievement_full_power = "CgkIlMWJ8uoBEAIQBQ"; // <GPGSID>
+        public const string achievement_one_zero = "CgkIlMWJ8uoBEAIQAg"; // <GPGSID>
+        public const string achievement_no_brakes = "CgkIlMWJ8uoBEAIQCQ"; // <GPGSID>
+        public const string achievement_half_century = "CgkIlMWJ8uoBEAIQAw"; // <GPGSID>
+        public const string achievement_over_99 = "CgkIlMWJ8uoBEAIQBA"; // <GPGSID>
+        public const string leaderboard_high_scores = "CgkIlMWJ8uoBEAIQBg"; // <GPGSID>
+        public const string achievement_first_death = "CgkIlMWJ8uoBEAIQAQ"; // <GPGSID>
 
 }
 
